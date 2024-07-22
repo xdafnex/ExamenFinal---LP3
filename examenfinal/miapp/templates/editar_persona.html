@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>Editar Persona</h1>
+<form action="{% url 'editar_persona' persona.id %}" method="post">
+    {% csrf_token %}
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" value="{{ persona.nombre }}" required>
+    <br>
+    <label for="apellidos">Apellidos:</label>
+    <input type="text" id="apellidos" name="apellidos" value="{{ persona.apellidos }}" required>
+    <br>
+    <label for="sexo">Sexo:</label>
+    <select id="sexo" name="sexo">
+        <option value="M" {% if persona.sexo == 'M' %}selected{% endif %}>Masculino</option>
+        <option value="F" {% if persona.sexo == 'F' %}selected{% endif %}>Femenino</option>
+    </select>
+    <br>
+    <button type="submit">Guardar Cambios</button>
+</form>
+{% endblock %}

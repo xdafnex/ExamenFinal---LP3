@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h1>Listado de personas</h1>
+<a href="{% url 'agregar_persona' %}" class="btn btn-add">Agregar Persona</a>
+<ul>
+    {% for persona in personas %}
+        <li>Nombre: {{ persona.nombre }} {{ persona.apellidos }} - 
+            Sexo: {{ persona.get_sexo_display }} - 
+            Fecha de registro: {{ persona.fecha_registro }} - 
+            <a href="{% url 'editar_persona' id=persona.id %}" class="btn btn-edit">Editar</a>
+            <a href="{% url 'eliminar_persona' id=persona.id %}" class="btn btn-delete">Eliminar</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}
